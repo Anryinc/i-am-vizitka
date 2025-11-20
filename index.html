@@ -1,85 +1,178 @@
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
-  <!-- ... весь твой <style> остаётся без изменений ... -->
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Андрей — HR, который говорит на языке кода</title>
   <style>
-    /* Добавь только эти строки к уже существующему .theme-switch */
-    .theme-switch {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      width: 64px;
-      height: 32px;
-      background: #444;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: inset 0 4px 8px rgba(0,0,0,0.3);
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --text: #222222;
+      --accent: #ff5722;
+      --accent-hover: #e64a19;
+      --muted: #666666;
     }
-    .theme-switch::before {
-      content: "";
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      width: 24px;
-      height: 24px;
-      background: white;
-      border-radius: 50%;
-      transition: 0.4s;
-      z-index: 1;
+    [data-theme="dark"] {
+      --bg: #0e0e0e;
+      --card: #1a1a1a;
+      --text: #eeeeee;
+      --accent: #ff5722;
+      --accent-hover: #ff7733;
+      --muted: #aaaaaa;
     }
-    .theme-switch::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
+    body { margin:0; font-family:'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; transition:background .4s; }
+    .container { width:95%; max-width:1200px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
+    .card { background:var(--card); border-radius:20px; padding:50px 40px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative; overflow:hidden; }
+    .theme-input { position:absolute; opacity:0; }
+    .theme-switch { position:absolute; top:20px; right:30px; width:64px; height:32px; background:#444; border-radius:50px; cursor:pointer; box-shadow:inset 0 4px 8px rgba(0,0,0,.3); }
+    .theme-switch::before { content:""; position:absolute; top:4px; left:4px; width:24px; height:24px; background:white; border-radius:50%; transition:.4s; }
+    .theme-input:checked ~ .theme-switch::before { transform:translateX(32px); }
+    .theme-input:checked ~ .theme-switch { background:var(--accent); }
+
+    .photo { width:180px; height:180px; border-radius:50%; background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat; border:7px solid var(--accent); box-shadow:0 15px 35px rgba(0,0,0,.4); }
+    h1 { font-size:2.6em; margin:20px 0 8px; }
+    .subtitle { font-size:1.4em; color:var(--accent); font-weight:600; margin-bottom:25px; }
+    .text { font-size:1.2em; line-height:1.8; margin:25px 0; }
+    ul { font-size:1.18em; line-height:1.9; padding-left:22px; margin:30px 0; }
+    button { background:var(--accent); color:white; border:none; padding:16px 32px; margin:10px; font-size:1.15em; border-radius:50px; cursor:pointer; box-shadow:0 8px 20px rgba(255,87,34,.4); transition:all .3s; }
+    button:hover { background:var(--accent-hover); transform:translateY(-4px); box-shadow:0 15px 30px rgba(255,87,34,.5); }
+    .contacts a { color:var(--accent); font-weight:600; text-decoration:none; }
+    .contacts a:hover { text-decoration:underline; }
+
+    /* === Опыт работы === */
+    .timeline { position:relative; padding-left:30px; }
+    .timeline::before { content:""; position:absolute; left:12px; top:0; bottom:0; width:4px; background:var(--accent); border-radius:2px; }
+    .job { position:relative; margin-bottom:40px; padding-left:30px; }
+    .job::before { content:""; position:absolute; left:-10px; top:8px; width:16px; height:16px; background:var(--card); border:4px solid var(--accent); border-radius:50%; }
+    .job h3 { margin:0 0 8px; font-size:1.35em; color:var(--accent); }
+    .job .company { font-weight:600; font-size:1.1em; color:var(--text); }
+    .job .period { font-size:0.95em; color:var(--muted); margin-bottom:10px; }
+    .job ul { margin:12px 0; padding-left:20px; font-size:1.05em; line-height:1.6; }
+
+    @media (max-width:900px) {
+      .container { grid-template-columns:1fr; gap:30px; }
+      .photo { margin:0 auto 30px; display:block; float:none; }
+      h1,.subtitle { text-align:center; }
     }
-    [data-theme="dark"] .theme-switch::after { content: ""; left: 34px; }
-    input:checked ~ .theme-switch::before { transform: translateX(32px); }
-    input:checked ~ .theme-switch { background: var(--accent); }
   </style>
 </head>
 <body>
 
-  <div class="card">
+<div class="container">
 
-    <!-- ПРАВИЛЬНЫЙ порядок: input → label → всё остальное -->
+  <!-- Левая колонка -->
+  <div class="card">
     <input type="checkbox" id="theme-toggle" class="theme-input">
     <label for="theme-toggle" class="theme-switch"></label>
 
-    <!-- весь остальной контент без изменений -->
     <div class="photo"></div>
     <h1>Привет, я Андрей</h1>
-    <!-- ... и так далее ... -->
+    <div class="subtitle">HR, который говорит на языке разработчиков</div>
 
+    <div class="text">
+      Знаю, чем Kanban отличается от Waterfall,<br>
+      почему 1С нельзя ставить на Linux-сервер<br>
+      и насколько важны очереди в высоконагруженных БД.<br><br>
+      Мой главный скилл — не просто искать людей по ключевым словам,<br>
+      а реально оценивать технические навыки с высокой точностью.
+    </div>
+
+    <ul>
+      <li>Провожу собеседования на одном языке с кандидатом, не путаю Java и JavaScript</li>
+      <li>Настраиваю процессы так, чтобы кайфовали и нанимающие, и соискатели</li>
+      <li>Создаю инструменты и работаю с аналитикой — в любой команде я мастер над цифрами</li>
+    </ul>
+
+    <div style="margin:40px 0;">
+      <button onclick="location.href='https://youtu.be/ТВОЯ_ССЫЛКА'">Видео-приветствие</button>
+      <button onclick="location.href='mailto:anryinc@gmail.com'">Написать мне</button>
+    </div>
+
+    <div class="contacts">
+      Telegram: <a href="https://t.me/Anryinc" target="_blank">@Anryinc</a><br>
+      LinkedIn: <a href="https://www.linkedin.com/in/anryinc" target="_blank">linkedin.com/in/anryinc</a><br>
+      Почта: <a href="mailto:anryinc@gmail.com">anryinc@gmail.com</a>
+    </div>
   </div>
 
-  <!-- Добавь этот скрипт прямо перед </body> -->
-  <script>
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
+  <!-- Правая колонка — опыт -->
+  <div class="card">
+    <h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
+    <div class="timeline">
 
-    // При загрузке страницы
-    if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      html.setAttribute('data-theme', 'dark');
-      toggle.checked = true;
-    }
+      <div class="job">
+        <h3>Менеджер по подбору</h3>
+        <div class="company">Купибилет (Топ-3 РФ по авиа/жд билетам)</div>
+        <div class="period">июль 2023 — сейчас · 2 г. 5 мес.</div>
+        <ul>
+          <li>70 % IT-поиск: Android, iOS, Frontend, Ruby, Go</li>
+          <li>За 6 месяцев закрыл весь фронтенд (рост ×2,5)</li>
+          <li>Рост iOS и Android на 30–40 %</li>
+          <li>KPI по прохождению ИС 95 %</li>
+          <li>С нуля построил HR-аналитику и дашборды компании</li>
+        </ul>
+      </div>
 
-    // При переключении
-    toggle.addEventListener('change', () => {
-      if (toggle.checked) {
-        html.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        html.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      }
-    });
-  </script>
+      <div class="job">
+        <h3>Специалист по найму</h3>
+        <div class="company">CodeItUp</div>
+        <div class="period">январь 2023 — июль 2023 · 7 мес.</div>
+        <ul>
+          <li>Полный цикл подбора SA, DevOps, Frontend/Backend</li>
+          <li>Онбординг, адаптация, внутренние мероприятия</li>
+          <li>Запустил корпоративный новостной канал и воскресил книжный клуб</li>
+        </ul>
+      </div>
 
+      <div class="job">
+        <h3>Менеджер по найму</h3>
+        <div class="company">Potok.io (HRTech)</div>
+        <div class="period">август 2021 — октябрь 2022 · 1 г. 3 мес.</div>
+        <ul>
+          <li>Подбор в период гиперроста: Ruby, Python, React, DevOps, PM</li>
+          <li>Выполнение плана по найму >100 %, ИС 94 %</li>
+          <li>Автоматизировал HR-отчётность и аналитику</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Территориальный менеджер по персоналу</h3>
+        <div class="company">МТС Retail (4 региона, 420 человек)</div>
+        <div class="period">май 2017 — апрель 2021 · 4 года</div>
+        <ul>
+          <li>С нуля выстроил HR-процессы в 4 регионах</li>
+          <li>Вывел регионы на 1 место в РФ по HR-метрикам</li>
+          <li>Самый низкий отток в стране</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Менеджер по подбору</h3>
+        <div class="company">Ростелеком</div>
+        <div class="period">апрель 2014 — май 2017 · 3 г. 2 мес.</div>
+        <ul>
+          <li>Рост отдела продаж с 30 до 180 человек</li>
+          <li>Выполнение плана по подбору >100 % каждый месяц</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    html.setAttribute('data-theme', 'dark');
+    toggle.checked = true;
+  }
+  toggle.addEventListener('change', () => {
+    if (toggle.checked) { html.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+    else { html.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light'); }
+  });
+</script>
 </body>
 </html>

@@ -90,11 +90,9 @@
     .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); }
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
-    /* КНОПКА CV — одна на всех устройствах, но в разных местах */
+/* КНОПКА CV — правильное поведение на всех устройствах */
 .cv-btn {
   position: absolute;
-  width: 52px;
-  height: 52px;
   background: var(--accent);
   color: white;
   border-radius: 50%;
@@ -107,22 +105,30 @@
   text-decoration: none;
 }
 
-/* По умолчанию — в левой карточке (для мобилки) */
+/* По умолчанию (мобилка) — показываем в правой карточке, но позиционируем в левую карточку */
 .cv-btn {
+  width: 52px;
+  height: 52px;
   top: 14px;
   right: 16px;
 }
-.cv-btn svg { width: 26px; height: 26px; }
+.cv-btn svg {
+  width: 26px;
+  height: 26px;
+}
 
-/* На десктопе — перемещаем в правую карточку */
+/* На десктопе — остаётся в правой карточке, чуть больше */
 @media (min-width: 901px) {
   .cv-btn {
-    top: 20px;
-    right: 20px;
     width: 56px;
     height: 56px;
+    top: 20px;
+    right: 20px;
   }
-  .cv-btn svg { width: 28px; height: 28px; }
+  .cv-btn svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .cv-btn:hover {
@@ -131,29 +137,13 @@
   box-shadow: 0 15px 35px rgba(249,115,22,.5);
 }
 
-    /* На десктопе — CV остаётся в правой карточке */
-    @media (min-width: 901px) {
-      .cv-btn { top:20px; right:20px; width:56px; height:56px; }
-      .cv-btn svg { width:28px; height:28px; }
-    }
 
-    /* === НА МОБИЛКЕ: свитч слева, CV справа === */
-    @media (max-width: 900px) {
-      .container { grid-template-columns: 1fr; gap:30px; }
-      .header { flex-direction:column; align-items:center; text-align:center; }
-      .buttons-vertical { flex-direction:row; flex-wrap:wrap; justify-content:center; gap:14px; }
-
-      /* Свитч темы — слева */
+       /* Свитч темы — слева */
       .theme-switch {
         left: 16px;
         top: 16px;
       }
 
-      /* CV — справа (в левой карточке) */
-      .cv-btn {
-        right: 16px !important;
-        top: 14px !important;
-      }
 
       .photo { margin:15px auto 20px; }
       h1 { font-size:2.1em; }
@@ -259,19 +249,20 @@
     </div>
   </div>
 
-  <!-- Правая карточка — опыт -->
-  <div class="card">
-    <a href="https://drive.google.com/file/d/1gKrlacdGYZJj8ZCtbc1pT7ZfB-7odxf4/view?usp=drive_link" target="_blank" class="cv-btn" title="Скачать резюме (PDF)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-    </a>
-  
-  <!-- Правая колонка — опыт (без изменений) -->
-<h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
-      <div class="timeline">
+<!-- Правая карточка — опыт -->
+<div class="card">
+  <!-- КНОПКА CV — ТОЛЬКО ЗДЕСЬ! -->
+  <a href="https://drive.google.com/file/d/1gKrlacdGYZJj8ZCtbc1pT7ZfB-7odxf4/view?usp=drive_link" 
+     target="_blank" class="cv-btn" title="Скачать резюме (PDF)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+  </a>
+
+  <h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
+  <div class="timeline">
       <div class="job">
         <h3>Менеджер по подбору</h3>
         <div class="company">Купибилет (Топ-3 РФ по авиа/жд билетам)</div>

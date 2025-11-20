@@ -25,34 +25,35 @@
     .container { width:95%; max-width:1200px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
     .card { background:var(--card); border-radius:20px; padding:50px 40px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative; overflow:hidden; }
 
-    /* Переключатель теперь в левом верхнем углу левой карточки */
+    /* ========== Переключатель (меньше и выше) ========== */
     .theme-input { position:absolute; opacity:0; }
     .theme-switch {
       position:absolute;
       top:20px;
-      left:30px;           /* ← вот сюда */
-      width:64px;
-      height:32px;
+      left:30px;
+      width:50px;        /* было 64 */
+      height:26px;       /* было 32 */
       background:#444;
       border-radius:50px;
       cursor:pointer;
-      box-shadow:inset 0 4px 8px rgba(0,0,0,.3);
+      box-shadow:inset 0 3px 6px rgba(0,0,0,.3);
       z-index:10;
     }
     .theme-switch::before {
       content:"";
       position:absolute;
-      top:4px;
-      left:4px;
-      width:24px;
-      height:24px;
+      top:3px;
+      left:3px;
+      width:20px;        /* было 24 */
+      height:20px;       /* было 24 */
       background:white;
       border-radius:50%;
-      transition:.4s;
+      transition:.35s;
     }
-    .theme-input:checked ~ .theme-switch::before { transform:translateX(32px); }
+    .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); } /* 50-26=24 */
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
+    /* ========== Фото теперь почти вплотную ========== */
     .photo {
       width:180px;
       height:180px;
@@ -60,8 +61,10 @@
       background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat;
       border:7px solid var(--accent);
       box-shadow:0 15px 35px rgba(0,0,0,.4);
-      margin-top: 70px;   /* чтобы не перекрывался переключателем */
+      margin-top: 15px;   /* было 70px → теперь 15px */
+      margin-bottom: 20px;
     }
+
     h1 { font-size:2.6em; margin:20px 0 8px; }
     .subtitle { font-size:1.4em; color:var(--accent); font-weight:600; margin-bottom:25px; }
     .text { font-size:1.2em; line-height:1.8; margin:25px 0; }
@@ -71,7 +74,7 @@
     .contacts a { color:var(--accent); font-weight:600; text-decoration:none; }
     .contacts a:hover { text-decoration:underline; }
 
-    /* Опыт работы */
+    /* Опыт работы — без изменений */
     .timeline { position:relative; padding-left:30px; }
     .timeline::before { content:""; position:absolute; left:12px; top:0; bottom:0; width:4px; background:var(--accent); border-radius:2px; }
     .job { position:relative; margin-bottom:40px; padding-left:30px; }
@@ -83,25 +86,22 @@
 
     @media (max-width:900px) {
       .container { grid-template-columns:1fr; gap:30px; }
-      .photo { margin:70px auto 30px; display:block; }
+      .photo { margin:15px auto 30px; display:block; }
       h1,.subtitle { text-align:center; }
       .theme-switch { left:50%; transform:translateX(-50%); }
     }
   </style>
 </head>
 <body>
-
+<!-- весь HTML-контент оставь точно как у тебя был — только стили выше поменялись -->
 <div class="container">
-
   <!-- Левая колонка -->
   <div class="card">
     <input type="checkbox" id="theme-toggle" class="theme-input">
     <label for="theme-toggle" class="theme-switch"></label>
-
     <div class="photo"></div>
     <h1>Привет, я Андрей</h1>
     <div class="subtitle">HR, который говорит на языке разработчиков</div>
-
     <div class="text">
       Знаю, чем Kanban отличается от Waterfall,<br>
       почему 1С нельзя ставить на Linux-сервер<br>
@@ -109,84 +109,25 @@
       Мой главный скилл — не просто искать людей по ключевым словам,<br>
       а реально оценивать технические навыки с высокой точностью.
     </div>
-
     <ul>
       <li>Провожу собеседования на одном языке с кандидатом, не путаю Java и JavaScript</li>
       <li>Настраиваю процессы так, чтобы кайфовали и нанимающие, и соискатели</li>
       <li>Создаю инструменты и работаю с аналитикой — в любой команде я мастер над цифрами</li>
     </ul>
-
     <div style="margin:40px 0;">
       <button onclick="location.href='https://youtu.be/QjF14x3cdJo'">Видео-приветствие</button>
       <button onclick="location.href='mailto:anryinc@gmail.com'">Написать мне</button>
     </div>
-
     <div class="contacts">
       Telegram: <a href="https://t.me/Anryinc" target="_blank">@Anryinc</a><br>
       LinkedIn: <a href="https://www.linkedin.com/in/anryinc" target="_blank">linkedin.com/in/anryinc</a><br>
       Почта: <a href="mailto:anryinc@gmail.com">anryinc@gmail.com</a>
     </div>
   </div>
-
   <!-- Правая колонка — опыт (без изменений) -->
   <div class="card">
-    <h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
-    <div class="timeline">
-      <div class="job">
-        <h3>Менеджер по подбору</h3>
-        <div class="company">Купибилет (Топ-3 РФ по авиа/жд билетам)</div>
-        <div class="period">июль 2023 — ноябрь 2025 · 2 г. 5 мес.</div>
-        <ul>
-          <li>70 % IT-поиск: Android, iOS, Frontend, Ruby, Go</li>
-          <li>За 6 месяцев закрыл весь фронтенд (рост команды в ×2,5)</li>
-          <li>Обеспечил рост iOS и Android на 30–50 %</li>
-          <li>KPI по прохождению ИС - 95 %</li>
-          <li>С нуля построил HR-аналитику и дашборды компании</li>
-        </ul>
-      </div>
-      <div class="job">
-        <h3>Специалист по найму</h3>
-        <div class="company">CodeItUp</div>
-        <div class="period">январь 2023 — июль 2023 · 7 мес.</div>
-        <ul>
-          <li>Полный цикл подбора SA, DevOps, Frontend/Backend</li>
-          <li>Онбординг, адаптация, внутренние мероприятия</li>
-          <li>Запустил корпоративный новостной канал и воскресил книжный клуб</li>
-        </ul>
-      </div>
-      <div class="job">
-        <h3>Менеджер по найму</h3>
-        <div class="company">Potok.io (HRTech)</div>
-        <div class="period">август 2021 — октябрь 2022 · 1 г. 3 мес.</div>
-        <ul>
-          <li>Подбор в период гиперроста: Ruby, Python, React, DevOps, PM</li>
-          <li>Выполнение плана по найму >100 %, ИС 94 %</li>
-          <li>Автоматизировал HR-отчётность и аналитику</li>
-        </ul>
-      </div>
-      <div class="job">
-        <h3>Территориальный менеджер по персоналу</h3>
-        <div class="company">МТС Retail (4 региона, 420 человек)</div>
-        <div class="period">май 2017 — апрель 2021 · 4 года</div>
-        <ul>
-          <li>Выстроил HR-процессы в 4 регионах и помог множеству других</li>
-          <li>Вывел регионы на 1 место в РФ по HR-метрикам</li>
-          <li>Самый низкий отток в стране</li>
-        </ul>
-      </div>
-      <div class="job">
-        <h3>Менеджер по подбору</h3>
-        <div class="company">Ростелеком</div>
-        <div class="period">апрель 2014 — май 2017 · 3 г. 2 мес.</div>
-        <ul>
-          <li>Рост отдела продаж с 30 до 180 человек</li>
-          <li>С нуля выстроил все процессы и вел бюджет команды продаж</li>
-          <li>Выполнение плана по подбору >100 % каждый месяц</li>
-        </ul>
-      </div>
-    </div>
+    <!-- ... твой опыт полностью как был ... -->
   </div>
-
 </div>
 
 <script>

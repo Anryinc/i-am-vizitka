@@ -8,7 +8,7 @@
     :root { --bg:#ffffff; --card:#ffffff; --text:#222222; --accent:#ff5722; --accent-hover:#e64a19; --muted:#666666; }
     [data-theme="dark"] { --bg:#0e0e0e; --card:#1a1a1a; --text:#eeeeee; --accent:#ff5722; --accent-hover:#ff7733; --muted:#aaaaaa; }
 
-    body { margin:0; font-family:'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; transition:background .4s; }
+    body { margin:0; font-family:'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; transition:background .4s; position:relative; }
     .container { width:95%; max-width:1200px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
     .card { background:var(--card); border-radius:20px; padding:50px 40px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative; overflow:hidden; }
 
@@ -19,14 +19,14 @@
     .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); }
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
-    /* Фото + кнопки слева */
+    /* Фото + кнопки */
     .header { display:flex; align-items:flex-start; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
     .photo { width:180px; height:180px; border-radius:50%; background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat; border:7px solid var(--accent); box-shadow:0 15px 35px rgba(0,0,0,.4); flex-shrink:0; }
     .buttons-vertical { display:flex; flex-direction:column; justify-content:center; gap:16px; margin-top:15px; }
     button { background:var(--accent); color:white; border:none; padding:15px 30px; font-size:1.05em; border-radius:50px; cursor:pointer; box-shadow:0 8px 20px rgba(255,87,34,.4); transition:all .3s; }
     button:hover { background:var(--accent-hover); transform:translateY(-3px); }
 
-    /* Шрифты — как тебе нравится */
+    /* Шрифты */
     h1 { font-size:2.3em; margin:0 0 6px; font-weight:600; }
     .subtitle { font-size:1.35em; color:var(--accent); font-weight:600; margin-bottom:20px; }
     .text { font-size:1.15em; line-height:1.75; margin:20px 0 25px; }
@@ -44,63 +44,57 @@
     .job .period { font-size:0.9em; color:var(--muted); margin-bottom:8px; }
     .job ul { margin:10px 0; padding-left:18px; font-size:0.98em; line-height:1.65; }
 
-    /* НОВАЯ КРУГЛАЯ КНОПКА CV в правом верхнем углу карточки опыта */
+    /* Кнопка CV */
     .cv-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+      position: absolute; top:20px; right:20px; width:56px; height:56px;
+      background:var(--accent); color:white; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 25px rgba(255,87,34,.5); transition:all .3s; z-index:9;
+      text-decoration:none;
+    }
+    .cv-btn:hover { background:var(--accent-hover); transform:translateY(-4px) scale(1.05); box-shadow:0 15px 35px rgba(255,87,34,.6); }
+    .cv-btn svg { width:28px; height:28px; }
+
+    /* НОВАЯ КНОПКА "НАВЕРХ" */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
       width: 56px;
       height: 56px;
       background: var(--accent);
       color: white;
+      border: none;
       border-radius: 50%;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255,87,34,.5);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all .4s ease;
+      z-index: 998;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 25px rgba(255,87,34,.5);
-      transition: all .3s;
-      z-index: 9;
-      text-decoration: none;
     }
-    .cv-btn:hover {
+    #backToTop.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    #backToTop:hover {
       background: var(--accent-hover);
-      transform: translateY(-4px) scale(1.05);
+      transform: translateY(-5px) scale(1.08);
       box-shadow: 0 15px 35px rgba(255,87,34,.6);
-    }
-    .cv-btn svg {
-      width: 28px;
-      height: 28px;
     }
 
     /* Модальное окно видео */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0; top: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.94);
-      backdrop-filter: blur(10px);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal.active { display: flex; }
-    .modal iframe {
-      width: 90%;
-      max-width: 900px;
-      height: 66vh;
-      min-height: 400px;
-      border-radius: 16px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.7);
-    }
-    .modal-close {
-      position: absolute;
-      top: 30px; right: 40px;
-      color: white; font-size: 52px; font-weight: 300;
-      cursor: pointer; z-index: 10000; line-height: 1;
-      transition: all .3s;
-    }
-    .modal-close:hover { transform: scale(1.2); }
+    .modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.94); backdrop-filter:blur(10px); align-items:center; justify-content:center; }
+    .modal.active { display:flex; }
+    .modal iframe { width:90%; max-width:900px; height:66vh; min-height:400px; border-radius:16px; box-shadow:0 25px 70px rgba(0,0,0,.7); }
+    .modal-close { position:absolute; top:30px; right:40px; color:white; font-size:52px; font-weight:300; cursor:pointer; z-index:10000; transition:all .3s; }
+    .modal-close:hover { transform:scale(1.2); }
 
     @media (max-width:900px) {
       .container { grid-template-columns:1fr; gap:30px; }
@@ -111,6 +105,7 @@
       h1 { font-size:2.1em; }
       .cv-btn { width:50px; height:50px; top:15px; right:15px; }
       .cv-btn svg { width:24px; height:24px; }
+      #backToTop { width:50px; height:50px; bottom:20px; right:20px; font-size:24px; }
       .modal iframe { height:56vh; }
       .modal-close { top:15px; right:20px; font-size:44px; }
     }
@@ -119,7 +114,6 @@
 <body>
 
 <div class="container">
-
   <!-- Левая карточка -->
   <div class="card">
     <input type="checkbox" id="theme-toggle" class="theme-input">
@@ -157,9 +151,8 @@
     </div>
   </div>
 
-  <!-- Правая карточка — опыт + КНОПКА CV -->
+  <!-- Правая карточка — опыт + CV кнопка -->
   <div class="card">
-    <!-- КНОПКА СКАЧАТЬ CV -->
     <a href="https://drive.google.com/file/d/1gKrlacdGYZJj8ZCtbc1pT7ZfB-7odxf4/view?usp=drive_link" target="_blank" class="cv-btn" title="Скачать резюме (PDF)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -227,14 +220,17 @@
   </div>
 </div>
 
+<!-- КНОПКА "НАВЕРХ" -->
+<button id="backToTop" title="Наверх">↑</button>
+
 <!-- Модальное окно видео -->
 <div id="videoModal" class="modal">
-  <span class="modal-close" id="closeVideo">x</span>
+  <span class="modal-close" id="closeVideo">×</span>
   <iframe id="youtubeVideo" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <script>
-  // Тема + видео-модалка — без изменений
+  // Тема
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -247,6 +243,7 @@
     localStorage.setItem('theme', theme);
   });
 
+  // Видео-модалка
   const modal = document.getElementById('videoModal');
   const iframe = document.getElementById('youtubeVideo');
   const openBtn = document.getElementById('openVideo');
@@ -266,8 +263,22 @@
   }
 
   closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === "Escape" && modal.classList.contains('active')) closeModal(); });
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === "Escape" && modal.classList.contains('active')) closeModal(); });
+
+  // КНОПКА НАВЕРХ
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>

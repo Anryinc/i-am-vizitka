@@ -88,43 +88,60 @@
     .cv-btn:hover { background:var(--accent-hover); transform:translateY(-4px) scale(1.05); box-shadow:0 15px 35px rgba(255,87,34,.6); }
     .cv-btn svg { width:28px; height:28px; }
 
-    /* КНОПКА НАВЕРХ — теперь появляется уже с 300px */
-    #backToTop {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 56px;
-      height: 56px;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(255,87,34,.5);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: all .4s ease;
-      z-index: 998;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #backToTop.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    #backToTop:hover {
-      background: var(--accent-hover);
-      transform: translateY(-5px) scale(1.08);
-      box-shadow: 0 15px 35px rgba(255,87,34,.6);
-    }
-    #backToTop svg {
-      width: 32px;
-      height: 32px;
-    }
+    /* КНОПКА НАВЕРХ — финальная рабочая версия */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255,87,34,.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all .4s ease;
+  z-index: 998;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#backToTop:hover {
+  background: var(--accent-hover);
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 0 15px 35px rgba(255,87,34,.6);
+}
+
+#backToTop svg {
+  width: 32px !important;
+  height: 32px !important;
+  pointer-events: none;
+}
+
+/* На мобилке чуть меньше */
+@media (max-width: 900px) {
+  #backToTop {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 20px;
+  }
+  #backToTop svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
 
     /* Модальное окно */
     .modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.94); backdrop-filter:blur(10px); align-items:center; justify-content:center; }
@@ -257,9 +274,9 @@
   </div>
 </div>
 
-<!-- КНОПКА НАВЕРХ — стала (с иконкой) -->
+<!-- КНОПКА НАВЕРХ — правильная версия -->
 <button id="backToTop" title="Наверх">
-  <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 19V5"></path>
     <path d="M5 12l7-7 7 7"></path>
   </svg>

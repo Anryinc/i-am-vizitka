@@ -25,83 +25,101 @@
     .container { width:95%; max-width:1200px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
     .card { background:var(--card); border-radius:20px; padding:50px 40px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative; overflow:hidden; }
 
-    /* ========== Переключатель (меньше и выше) ========== */
+    /* Переключатель */
     .theme-input { position:absolute; opacity:0; }
     .theme-switch {
-      position:absolute;
-      top:20px;
-      left:30px;
-      width:50px;        /* было 64 */
-      height:26px;       /* было 32 */
-      background:#444;
-      border-radius:50px;
-      cursor:pointer;
-      box-shadow:inset 0 3px 6px rgba(0,0,0,.3);
-      z-index:10;
+      position:absolute; top:20px; left:30px; width:50px; height:26px;
+      background:#444; border-radius:50px; cursor:pointer;
+      box-shadow:inset 0 3px 6px rgba(0,0,0,.3); z-index:10;
     }
     .theme-switch::before {
-      content:"";
-      position:absolute;
-      top:3px;
-      left:3px;
-      width:20px;        /* было 24 */
-      height:20px;       /* было 24 */
-      background:white;
-      border-radius:50%;
-      transition:.35s;
+      content:""; position:absolute; top:3px; left:3px; width:20px; height:20px;
+      background:white; border-radius:50%; transition:.35s;
     }
-    .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); } /* 50-26=24 */
+    .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); }
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
-    /* ========== Фото теперь почти вплотную ========== */
-    .photo {
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat;
-      border:7px solid var(--accent);
-      box-shadow:0 15px 35px rgba(0,0,0,.4);
-      margin-top: 15px;   /* было 70px → теперь 15px */
-      margin-bottom: 20px;
+    /* Обёртка фото + кнопки */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
     }
+    .photo {
+      width:180px; height:180px; border-radius:50%;
+      background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat;
+      border:7px solid var(--accent); box-shadow:0 15px 35px rgba(0,0,0,.4);
+      flex-shrink: 0;
+    }
+    .buttons-vertical {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 15px;
+    }
+    button {
+      background:var(--accent); color:white; border:none;
+      padding:16px 32px; font-size:1.15em; border-radius:50px;
+      cursor:pointer; box-shadow:0 8px 20px rgba(255,87,34,.4);
+      transition:all .3s; white-space:nowrap;
+    }
+    button:hover { background:var(--accent-hover); transform:translateY(-4px); box-shadow:0 15px 30px rgba(255,87,34,.5); }
 
-    h1 { font-size:2.6em; margin:20px 0 8px; }
+    h1 { font-size:2.6em; margin:0 0 8px; }
     .subtitle { font-size:1.4em; color:var(--accent); font-weight:600; margin-bottom:25px; }
     .text { font-size:1.2em; line-height:1.8; margin:25px 0; }
     ul { font-size:1.18em; line-height:1.9; padding-left:22px; margin:30px 0; }
-    button { background:var(--accent); color:white; border:none; padding:16px 32px; margin:10px; font-size:1.15em; border-radius:50px; cursor:pointer; box-shadow:0 8px 20px rgba(255,87,34,.4); transition:all .3s; }
-    button:hover { background:var(--accent-hover); transform:translateY(-4px); box-shadow:0 15px 30px rgba(255,87,34,.5); }
     .contacts a { color:var(--accent); font-weight:600; text-decoration:none; }
     .contacts a:hover { text-decoration:underline; }
 
-    /* Опыт работы — без изменений */
+    /* Опыт работы без изменений */
     .timeline { position:relative; padding-left:30px; }
     .timeline::before { content:""; position:absolute; left:12px; top:0; bottom:0; width:4px; background:var(--accent); border-radius:2px; }
     .job { position:relative; margin-bottom:40px; padding-left:30px; }
     .job::before { content:""; position:absolute; left:-10px; top:8px; width:16px; height:16px; background:var(--card); border:4px solid var(--accent); border-radius:50%; }
     .job h3 { margin:0 0 8px; font-size:1.35em; color:var(--accent); }
-    .job .company { font-weight:600; font-size:1.1em; color:var(--text); }
+    .job .company { font-weight:600; font-size:1.1em; }
     .job .period { font-size:0.95em; color:var(--muted); margin-bottom:10px; }
     .job ul { margin:12px 0; padding-left:20px; font-size:1.05em; line-height:1.6; }
 
+    /* Лайтбокс для видео */
+    .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85）；backdrop-filter:blur(5px); }
+    .modal:target { display:flex; align-items:center; justify-content:center; }
+    .modal video { max-width:90%; max-height:90vh; border-radius:16px; box-shadow:0 20px 50px rgba(0,0,0,.8); }
+    .close { position:absolute; top:30px; right:40px; color:white; font-size:50px; text-decoration:none; }
+
     @media (max-width:900px) {
       .container { grid-template-columns:1fr; gap:30px; }
-      .photo { margin:15px auto 30px; display:block; }
-      h1,.subtitle { text-align:center; }
+      .header { flex-direction:column; align-items:center; text-align:center; }
+      .buttons-vertical { flex-direction:row; flex-wrap:wrap; justify-content:center; }
+      .photo { margin:15px auto 20px; }
       .theme-switch { left:50%; transform:translateX(-50%); }
     }
   </style>
 </head>
 <body>
-<!-- весь HTML-контент оставь точно как у тебя был — только стили выше поменялись -->
+
 <div class="container">
+
   <!-- Левая колонка -->
   <div class="card">
     <input type="checkbox" id="theme-toggle" class="theme-input">
     <label for="theme-toggle" class="theme-switch"></label>
-    <div class="photo"></div>
+
+    <div class="header">
+      <div class="photo"></div>
+      <div class="buttons-vertical">
+        <button onclick="document.getElementById('videoModal').style.display='flex'">Видео-приветствие</button>
+        <button onclick="location.href='mailto:anryinc@gmail.com'">Написать мне</button>
+      </div>
+    </div>
+
     <h1>Привет, я Андрей</h1>
     <div class="subtitle">HR, который говорит на языке разработчиков</div>
+
     <div class="text">
       Знаю, чем Kanban отличается от Waterfall,<br>
       почему 1С нельзя ставить на Linux-сервер<br>
@@ -109,21 +127,20 @@
       Мой главный скилл — не просто искать людей по ключевым словам,<br>
       а реально оценивать технические навыки с высокой точностью.
     </div>
+
     <ul>
       <li>Провожу собеседования на одном языке с кандидатом, не путаю Java и JavaScript</li>
       <li>Настраиваю процессы так, чтобы кайфовали и нанимающие, и соискатели</li>
       <li>Создаю инструменты и работаю с аналитикой — в любой команде я мастер над цифрами</li>
     </ul>
-    <div style="margin:40px 0;">
-      <button onclick="location.href='https://youtu.be/QjF14x3cdJo'">Видео-приветствие</button>
-      <button onclick="location.href='mailto:anryinc@gmail.com'">Написать мне</button>
-    </div>
+
     <div class="contacts">
       Telegram: <a href="https://t.me/Anryinc" target="_blank">@Anryinc</a><br>
       LinkedIn: <a href="https://www.linkedin.com/in/anryinc" target="_blank">linkedin.com/in/anryinc</a><br>
       Почта: <a href="mailto:anryinc@gmail.com">anryinc@gmail.com</a>
     </div>
   </div>
+
   <!-- Правая колонка — опыт (без изменений) -->
   <div class="card">
     <h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
@@ -184,7 +201,17 @@
   </div>
 </div>
 
+<!-- Всплывающее видео -->
+<div id="videoModal" class="modal">
+  <a href="#" class="close">×</a>
+  <video controls autoplay>
+    <source src="https://www.youtube.com/embed/QjF14x3cdJo" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+  </video>
+</div>
+
 <script>
+  // Тема
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -194,6 +221,11 @@
   toggle.addEventListener('change', () => {
     if (toggle.checked) { html.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
     else { html.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light'); }
+  });
+
+  // Закрытие модалки по клику вне видео
+  document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
   });
 </script>
 </body>

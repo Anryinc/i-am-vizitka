@@ -5,93 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Андрей — HR, который говорит на языке кода</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --text: #222222;
+      --accent: #ff5722;     /* оранжевый */
+      --accent-hover: #e64a19;
+    }
+    [data-theme="dark"] {
+      --bg: #0e0e0e;
+      --card: #1a1a1a;
+      --text: #eeeeee;
+      --accent: #ff5722;
+      --accent-hover: #ff7733;
+    }
+
     body {
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #333;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
+      display: flex;
+      align-items: center;
+      transition: background 0.4s;
     }
     .card {
-      background: white;
-      border-radius: 16px;
+      width: 90%;
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--card);
+      border-radius: 20px;
       padding: 50px 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
       position: relative;
-      overflow: hidden;
     }
+    .theme-switch {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      width: 60px;
+      height: 30px;
+      background: #333;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    .theme-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+    input:checked + .theme-switch::after { left: 33px; }
+    input:checked + .theme-switch { background: var(--accent); }
+
     .photo {
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      background: #ddd url('https://github.com/Anryinc/i-am-vizitka/blob/main/9KfgPk89YT8.jpg?raw=true') center/cover no-repeat; /* ← сюда потом свою фотку */
-      border: 6px solid white;
+      background: url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat;
+      border: 7px solid var(--accent);
       float: left;
-      margin-right: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin: 0 35px 20px 0;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     }
-    h1 {
-      font-size: 2.4em;
-      color: #2c3e50;
-      margin: 0 0 10px 0;
-    }
-    .subtitle {
-      font-size: 1.3em;
-      color: #764ba2;
-      margin-bottom: 20px;
-    }
-    .text {
-      font-size: 1.15em;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      clear: both;
-    }
-    ul {
-      font-size: 1.15em;
-      line-height: 1.8;
-      padding-left: 20px;
-      margin: 25px 0;
-    }
-    .buttons {
-      margin: 35px 0;
-    }
+    h1 { font-size: 2.6em; margin: 0 0 8px; color: var(--text); }
+    .subtitle { font-size: 1.4em; color: var(--accent); margin-bottom: 25px; font-weight: 600; }
+
+    .text { font-size: 1.2em; line-height: 1.8; margin: 25px 0; }
+    ul { font-size: 1.2em; line-height: 1.9; padding-left: 22px; margin: 30px 0; }
+    .buttons { margin: 40px 0; }
     button {
-      background: #764ba2;
+      background: var(--accent);
       color: white;
       border: none;
-      padding: 14px 28px;
-      margin: 8px;
-      font-size: 1.1em;
+      padding: 16px 32px;
+      margin: 10px;
+      font-size: 1.15em;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(118,75,162,0.4);
+      box-shadow: 0 8px 20px rgba(255,87,34,0.4);
       transition: all 0.3s;
     }
     button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(118,75,162,0.5);
+      background: var(--accent-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(255,87,34,0.5);
     }
-    .contacts {
-      margin-top: 40px;
-      font-size: 1.2em;
-    }
-    .contacts a {
-      color: #764ba2;
-      text-decoration: none;
-      font-weight: 500;
-    }
+    .contacts a { color: var(--accent); font-weight: 600; text-decoration: none; }
     .contacts a:hover { text-decoration: underline; }
-    @media (max-width: 600px) {
-      .photo { float: none; margin: 0 auto 20px; display: block; }
-      h1 { text-align: center; }
+
+    @media (max-width: 700px) {
+      .photo { float: none; display: block; margin: 0 auto 30px; }
+      h1, .subtitle { text-align: center; }
     }
   </style>
 </head>
 <body>
 
   <div class="card">
+    <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle" onchange="document.documentElement.setAttribute('data-theme', this.checked ? 'dark' : 'light')">
+    </label>
+
     <div class="photo"></div>
 
     <h1>Привет, я Андрей</h1>
@@ -112,7 +133,7 @@
     </ul>
 
     <div class="buttons">
-      <button onclick="location.href='https://youtu.be/ТВОЯ_ПРИВАТНАЯ_ССЫЛКА'">Видео-приветствие</button>
+      <button onclick="location.href='https://youtu.be/ТВОЯ_ССЫЛКА'">Видео-приветствие</button>
       <button onclick="location.href='https://t.me/Anryinc'">Написать мне</button>
     </div>
 

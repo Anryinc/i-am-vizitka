@@ -12,21 +12,21 @@
     .container { width:95%; max-width:1200px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
     .card { background:var(--card); border-radius:20px; padding:50px 40px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative; overflow:hidden; }
 
-    /* Переключатель */
+    /* Переключатель темы */
     .theme-input { position:absolute; opacity:0; }
     .theme-switch { position:absolute; top:20px; left:30px; width:50px; height:26px; background:#444; border-radius:50px; cursor:pointer; box-shadow:inset 0 3px 6px rgba(0,0,0,.3); z-index:10; }
     .theme-switch::before { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; background:white; border-radius:50%; transition:.35s; }
     .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); }
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
-    /* Фото + кнопки */
+    /* Фото + кнопки слева */
     .header { display:flex; align-items:flex-start; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
     .photo { width:180px; height:180px; border-radius:50%; background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat; border:7px solid var(--accent); box-shadow:0 15px 35px rgba(0,0,0,.4); flex-shrink:0; }
     .buttons-vertical { display:flex; flex-direction:column; justify-content:center; gap:16px; margin-top:15px; }
     button { background:var(--accent); color:white; border:none; padding:15px 30px; font-size:1.05em; border-radius:50px; cursor:pointer; box-shadow:0 8px 20px rgba(255,87,34,.4); transition:all .3s; }
     button:hover { background:var(--accent-hover); transform:translateY(-3px); }
 
-    /* === УМЕНЬШЕННЫЕ ШРИФТЫ — как тебе нравилось в первых версиях === */
+    /* Шрифты — как тебе нравится */
     h1 { font-size:2.3em; margin:0 0 6px; font-weight:600; }
     .subtitle { font-size:1.35em; color:var(--accent); font-weight:600; margin-bottom:20px; }
     .text { font-size:1.15em; line-height:1.75; margin:20px 0 25px; }
@@ -44,7 +44,35 @@
     .job .period { font-size:0.9em; color:var(--muted); margin-bottom:8px; }
     .job ul { margin:10px 0; padding-left:18px; font-size:0.98em; line-height:1.65; }
 
-    /* Модальное окно */
+    /* НОВАЯ КРУГЛАЯ КНОПКА CV в правом верхнем углу карточки опыта */
+    .cv-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(255,87,34,.5);
+      transition: all .3s;
+      z-index: 9;
+      text-decoration: none;
+    }
+    .cv-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(255,87,34,.6);
+    }
+    .cv-btn svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Модальное окно видео */
     .modal {
       display: none;
       position: fixed;
@@ -81,7 +109,9 @@
       .photo { margin:15px auto 20px; }
       .theme-switch { left:50%; transform:translateX(-50%); }
       h1 { font-size:2.1em; }
-      .modal iframe { height: 56vh; }
+      .cv-btn { width:50px; height:50px; top:15px; right:15px; }
+      .cv-btn svg { width:24px; height:24px; }
+      .modal iframe { height:56vh; }
       .modal-close { top:15px; right:20px; font-size:44px; }
     }
   </style>
@@ -89,6 +119,8 @@
 <body>
 
 <div class="container">
+
+  <!-- Левая карточка -->
   <div class="card">
     <input type="checkbox" id="theme-toggle" class="theme-input">
     <label for="theme-toggle" class="theme-switch"></label>
@@ -124,11 +156,21 @@
       Почта: <a href="mailto:anryinc@gmail.com">anryinc@gmail.com</a>
     </div>
   </div>
+
+  <!-- Правая карточка — опыт + КНОПКА CV -->
+  <div class="card">
+    <!-- КНОПКА СКАЧАТЬ CV -->
+    <a href="https://drive.google.com/file/d/1gKrlacdGYZJj8ZCtbc1pT7ZfB-7odxf4/view?usp=drive_link" target="_blank" class="cv-btn" title="Скачать резюме (PDF)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+    </a>
   
   <!-- Правая колонка — опыт (без изменений) -->
-  <div class="card">
-    <h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
-    <div class="timeline">
+<h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
+      <div class="timeline">
       <div class="job">
         <h3>Менеджер по подбору</h3>
         <div class="company">Купибилет (Топ-3 РФ по авиа/жд билетам)</div>
@@ -187,12 +229,12 @@
 
 <!-- Модальное окно видео -->
 <div id="videoModal" class="modal">
-  <span class="modal-close" id="closeVideo">×</span>
+  <span class="modal-close" id="closeVideo">x</span>
   <iframe id="youtubeVideo" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <script>
-  // Тема
+  // Тема + видео-модалка — без изменений
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -205,7 +247,6 @@
     localStorage.setItem('theme', theme);
   });
 
-  // Видео-модалка
   const modal = document.getElementById('videoModal');
   const iframe = document.getElementById('youtubeVideo');
   const openBtn = document.getElementById('openVideo');
@@ -226,9 +267,7 @@
 
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape" && modal.classList.contains('active')) closeModal();
-  });
+  document.addEventListener('keydown', (e) => { if (e.key === "Escape" && modal.classList.contains('active')) closeModal(); });
 </script>
 </body>
 </html>

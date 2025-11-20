@@ -24,13 +24,44 @@
     body { margin:0; font-family:'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; transition:background .4s; }
     .container { width:95%; max-width:1200px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:50px; }
     .card { background:var(--card); border-radius:20px; padding:50px 40px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative; overflow:hidden; }
+
+    /* Переключатель теперь в левом верхнем углу левой карточки */
     .theme-input { position:absolute; opacity:0; }
-    .theme-switch { position:absolute; top:20px; right:30px; width:64px; height:32px; background:#444; border-radius:50px; cursor:pointer; box-shadow:inset 0 4px 8px rgba(0,0,0,.3); }
-    .theme-switch::before { content:""; position:absolute; top:4px; left:4px; width:24px; height:24px; background:white; border-radius:50%; transition:.4s; }
+    .theme-switch {
+      position:absolute;
+      top:20px;
+      left:30px;           /* ← вот сюда */
+      width:64px;
+      height:32px;
+      background:#444;
+      border-radius:50px;
+      cursor:pointer;
+      box-shadow:inset 0 4px 8px rgba(0,0,0,.3);
+      z-index:10;
+    }
+    .theme-switch::before {
+      content:"";
+      position:absolute;
+      top:4px;
+      left:4px;
+      width:24px;
+      height:24px;
+      background:white;
+      border-radius:50%;
+      transition:.4s;
+    }
     .theme-input:checked ~ .theme-switch::before { transform:translateX(32px); }
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
-    .photo { width:180px; height:180px; border-radius:50%; background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat; border:7px solid var(--accent); box-shadow:0 15px 35px rgba(0,0,0,.4); }
+    .photo {
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:url('https://raw.githubusercontent.com/Anryinc/i-am-vizitka/main/9KfgPk89YT8.jpg') center/cover no-repeat;
+      border:7px solid var(--accent);
+      box-shadow:0 15px 35px rgba(0,0,0,.4);
+      margin-top: 70px;   /* чтобы не перекрывался переключателем */
+    }
     h1 { font-size:2.6em; margin:20px 0 8px; }
     .subtitle { font-size:1.4em; color:var(--accent); font-weight:600; margin-bottom:25px; }
     .text { font-size:1.2em; line-height:1.8; margin:25px 0; }
@@ -40,7 +71,7 @@
     .contacts a { color:var(--accent); font-weight:600; text-decoration:none; }
     .contacts a:hover { text-decoration:underline; }
 
-    /* === Опыт работы === */
+    /* Опыт работы */
     .timeline { position:relative; padding-left:30px; }
     .timeline::before { content:""; position:absolute; left:12px; top:0; bottom:0; width:4px; background:var(--accent); border-radius:2px; }
     .job { position:relative; margin-bottom:40px; padding-left:30px; }
@@ -52,8 +83,9 @@
 
     @media (max-width:900px) {
       .container { grid-template-columns:1fr; gap:30px; }
-      .photo { margin:0 auto 30px; display:block; float:none; }
+      .photo { margin:70px auto 30px; display:block; }
       h1,.subtitle { text-align:center; }
+      .theme-switch { left:50%; transform:translateX(-50%); }
     }
   </style>
 </head>
@@ -96,11 +128,10 @@
     </div>
   </div>
 
-  <!-- Правая колонка — опыт -->
+  <!-- Правая колонка — опыт (без изменений) -->
   <div class="card">
     <h2 style="margin-top:0; color:var(--accent);">Опыт работы</h2>
     <div class="timeline">
-
       <div class="job">
         <h3>Менеджер по подбору</h3>
         <div class="company">Купибилет (Топ-3 РФ по авиа/жд билетам)</div>
@@ -113,7 +144,6 @@
           <li>С нуля построил HR-аналитику и дашборды компании</li>
         </ul>
       </div>
-
       <div class="job">
         <h3>Специалист по найму</h3>
         <div class="company">CodeItUp</div>
@@ -124,7 +154,6 @@
           <li>Запустил корпоративный новостной канал и воскресил книжный клуб</li>
         </ul>
       </div>
-
       <div class="job">
         <h3>Менеджер по найму</h3>
         <div class="company">Potok.io (HRTech)</div>
@@ -135,7 +164,6 @@
           <li>Автоматизировал HR-отчётность и аналитику</li>
         </ul>
       </div>
-
       <div class="job">
         <h3>Территориальный менеджер по персоналу</h3>
         <div class="company">МТС Retail (4 региона, 420 человек)</div>
@@ -146,7 +174,6 @@
           <li>Самый низкий отток в стране</li>
         </ul>
       </div>
-
       <div class="job">
         <h3>Менеджер по подбору</h3>
         <div class="company">Ростелеком</div>
@@ -157,7 +184,6 @@
           <li>Выполнение плана по подбору >100 % каждый месяц</li>
         </ul>
       </div>
-
     </div>
   </div>
 

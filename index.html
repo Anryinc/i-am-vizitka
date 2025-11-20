@@ -90,30 +90,46 @@
     .theme-input:checked ~ .theme-switch::before { transform:translateX(24px); }
     .theme-input:checked ~ .theme-switch { background:var(--accent); }
 
-    /* === КНОПКА CV — теперь в левой карточке на мобилке === */
-    .cv-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 52px;
-      height: 52px;
-      background: var(--accent);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 25px rgba(249,115,22,.4);
-      transition: all .3s;
-      z-index: 9;
-      text-decoration: none;
-    }
-    .cv-btn:hover {
-      background: var(--accent-hover);
-      transform: translateY(-4px) scale(1.08);
-      box-shadow: 0 15px 35px rgba(249,115,22,.5);
-    }
-    .cv-btn svg { width: 26px; height: 26px; }
+    /* КНОПКА CV — одна на всех устройствах, но в разных местах */
+.cv-btn {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(249,115,22,.4);
+  transition: all .3s;
+  z-index: 9;
+  text-decoration: none;
+}
+
+/* По умолчанию — в левой карточке (для мобилки) */
+.cv-btn {
+  top: 14px;
+  right: 16px;
+}
+.cv-btn svg { width: 26px; height: 26px; }
+
+/* На десктопе — перемещаем в правую карточку */
+@media (min-width: 901px) {
+  .cv-btn {
+    top: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+  }
+  .cv-btn svg { width: 28px; height: 28px; }
+}
+
+.cv-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 15px 35px rgba(249,115,22,.5);
+}
 
     /* На десктопе — CV остаётся в правой карточке */
     @media (min-width: 901px) {
@@ -213,15 +229,6 @@
     <input type="checkbox" id="theme-toggle" class="theme-input">
     <label for="theme-toggle" class="theme-switch"></label>
 
-    <!-- КНОПКА CV теперь здесь на мобилке -->
-    <a href="https://drive.google.com/file/d/1gKrlacdGYZJj8ZCtbc1pT7ZfB-7odxf4/view?usp=drive_link" 
-       target="_blank" class="cv-btn" title="Скачать резюме (PDF)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-    </a>
 
     <div class="header">
       <div class="photo"></div>

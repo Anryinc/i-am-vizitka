@@ -88,7 +88,7 @@
     .cv-btn:hover { background:var(--accent-hover); transform:translateY(-4px) scale(1.05); box-shadow:0 15px 35px rgba(255,87,34,.6); }
     .cv-btn svg { width:28px; height:28px; }
 
-    /* КНОПКА НАВЕРХ — финальная рабочая версия */
+    /* КНОПКА НАВЕРХ — ФИНАЛЬНАЯ, РАБОЧАЯ НА ВСЕХ УСТРОЙСТВАХ */
 #backToTop {
   position: fixed;
   bottom: 30px;
@@ -96,7 +96,6 @@
   width: 56px;
   height: 56px;
   background: var(--accent);
-  color: white;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -106,9 +105,11 @@
   transform: translateY(20px);
   transition: all .4s ease;
   z-index: 998;
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  font-size: 0; /* ← КЛЮЧЕВОЕ! Убираем любой текст и font-size */
 }
 
 #backToTop.show {
@@ -124,11 +125,27 @@
 }
 
 #backToTop svg {
-  width: 32px !important;
-  height: 32px !important;
-  pointer-events: none;
+  width: 34px;
+  height: 34px;
+  stroke: white;
+  stroke-width: 2.8;
+  fill: none;
 }
 
+/* Мобильная версия */
+@media (max-width: 900px) {
+  #backToTop {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 20px;
+  }
+  #backToTop svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+    
 /* На мобилке чуть меньше */
 @media (max-width: 900px) {
   #backToTop {

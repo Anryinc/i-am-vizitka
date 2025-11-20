@@ -1,31 +1,127 @@
-<html lang=ru>
-  <head>
-    <meta charset=utf-8>
-    <meta name=viewport content=width=device-width, initial-scale=1>
-  <title>Андрей - HR, который говорит на языке кода</title>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Андрей — HR, который говорит на языке кода</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 30px 20px; background: #f9fafa; color: #333; line-height: 1.6; }
-    h1 { color: #1a5fb4; font-size: 2em; margin-bottom: 10px; }
-    p { font-size: 1.1em; } .intro { text-align: center; margin-bottom: 40px; }
-    .photo { width: 140px; height: 140px; border-radius: 50%; background: #ccc; float: left; margin-right: 20px; box-shadow: 0 5px 15px rgba(0,0,0,.1); }
-    .section { clear: both; margin-bottom: 30px; }
-    button { background: #1a5fb4; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; font-size: 1em; border-radius: 4px; }
-    a { text-decoration: none; color: #1a5fb4; } a:hover { text-decoration: underline; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 50px 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #ddd url('https://via.placeholder.com/300') center/cover; /* ← сюда потом свою фотку */
+      border: 6px solid white;
+      float: left;
+      margin-right: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 2.4em;
+      color: #2c3e50;
+      margin: 0 0 10px 0;
+    }
+    .subtitle {
+      font-size: 1.3em;
+      color: #764ba2;
+      margin-bottom: 20px;
+    }
+    .text {
+      font-size: 1.15em;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      clear: both;
+    }
+    ul {
+      font-size: 1.15em;
+      line-height: 1.8;
+      padding-left: 20px;
+      margin: 25px 0;
+    }
+    .buttons {
+      margin: 35px 0;
+    }
+    button {
+      background: #764ba2;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      margin: 8px;
+      font-size: 1.1em;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(118,75,162,0.4);
+      transition: all 0.3s;
+    }
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(118,75,162,0.5);
+    }
+    .contacts {
+      margin-top: 40px;
+      font-size: 1.2em;
+    }
+    .contacts a {
+      color: #764ba2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contacts a:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      .photo { float: none; margin: 0 auto 20px; display: block; }
+      h1 { text-align: center; }
+    }
   </style>
-  </head>
-  <body>  Привет, я Андрей
-HR, который знает, чем Kanban отличается от Waterfall,
-почему 1С нельзя ставить на Linux-сервер
-и насколько важны очереди в высоконагруженных БД.
-Мой главный скилл — не просто искать людей по ключевым словам,
-а реально оценивать технические навыки с высокой точностью.
-Чем могу помочь:
-• Провожу собеседования на одном языке с кандидатом, разбираюсь в стеке и не путаю Java с JavaScript
-• Настраиваю процессы так, чтобы кайфовали и нанимающие, и соискатели
-• Создаю инструменты и работаю с аналитикой — в любой команде я мастер над цифрами
-    <button onclick=window.location.href='https://youtube.com/me'>Видео-приветствие</button>
-    <button>Мой подход</button>
-    <button onclick=window.location.href='mailto:hi@andreihr.ru'>Написать</button>
-     Telegram: <a href=https://t.me/andrei_hr>@andrei_hr
-     LinkedIn: <a href=https://linkedin.com/in/andrei-hr>/in/andrei-hr
-     Почта: hi@andreihr.ru  </body> </html>
+</head>
+<body>
+
+  <div class="card">
+    <div class="photo"></div>
+
+    <h1>Привет, я Андрей</h1>
+    <div class="subtitle">HR, который говорит на языке разработчиков</div>
+
+    <div class="text">
+      Знаю, чем Kanban отличается от Waterfall,<br>
+      почему 1С нельзя ставить на Linux-сервер<br>
+      и насколько важны очереди в высоконагруженных БД.<br><br>
+      Мой главный скилл — не просто искать людей по ключевым словам,<br>
+      а реально оценивать технические навыки с высокой точностью.
+    </div>
+
+    <ul>
+      <li>Провожу собеседования на одном языке с кандидатом, не путаю Java и JavaScript</li>
+      <li>Настраиваю процессы так, чтобы кайфовали и нанимающие, и соискатели</li>
+      <li>Создаю инструменты и работаю с аналитикой — в любой команде я мастер над цифрами</li>
+    </ul>
+
+    <div class="buttons">
+      <button onclick="location.href='https://youtu.be/ТВОЯ_ПРИВАТНАЯ_ССЫЛКА'">Видео-приветствие</button>
+      <button onclick="location.href='mailto:hi@andreihr.ru'">Написать мне</button>
+    </div>
+
+    <div class="contacts">
+      Telegram: <a href="@Anryinc" target="_blank">https://t.me/Anryinc</a><br>
+      LinkedIn: <a href="www.linkedin.com/in/anryinc" target="_blank">https://www.linkedin.com/in/anryinc/</a><br>
+      Почта: <a href="anryinc@gmail.com">anryinc@gmail.com</a>
+    </div>
+  </div>
+
+</body>
+</html>
